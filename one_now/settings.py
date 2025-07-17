@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_extensions',
     'backend_api'
 ]
 
@@ -60,6 +62,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+}
+
 
 ROOT_URLCONF = "one_now.urls"
 

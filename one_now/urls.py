@@ -6,8 +6,8 @@ from backend_api.views import VehicleViewSet, BookingViewSet, RegisterView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
-router.register(r'vehicles', VehicleViewSet)
-router.register(r'bookings', BookingViewSet)
+router.register(r'vehicles', VehicleViewSet,  basename='vehicle')
+router.register(r'bookings', BookingViewSet,  basename='booking')
 
 urlpatterns = [
     path('', include(router.urls)),
