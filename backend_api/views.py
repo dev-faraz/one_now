@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework import status
+from django.utils.dateparse import parse_date
 
 class VehicleViewSet(viewsets.ModelViewSet):
     serializer_class = VehicleSerializer
@@ -24,7 +25,22 @@ class BookingViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Booking.objects.filter(vehicle__user=self.request.user)
+        queryset = Booking.objects.filter(vehicle__user=self.request.user)
+
+        from_date = self.request.query_params.get('from')
+        to_date = self.request.query_params.get('to')
+
+        if from_date:
+            parsed_from = parse_date(from_date)
+            if parsed_from:
+                queryset = queryset.filter(start_date__gte=parsed_from)
+
+        if to_date:
+            parsed_to = parse_date(to_date)
+            if parsed_to:
+                queryset = queryset.filter(end_date__lte=parsed_to)
+
+        return queryset
 
     def perform_create(self, serializer):
         vehicle = serializer.validated_data['vehicle']
