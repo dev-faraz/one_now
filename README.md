@@ -21,53 +21,53 @@
 
 ## A *Postman Collection* is attached in repo for better understanding of the api endpoints.
 
-# POST /register/
+### POST /register/
  - Description: Registers a new user.
  - Request: {"username": "user1", "password": "pass123"}
  - Response:
     - Success: {"message": "User created successfully."} (201)
     - Error: {"error": "Username and password are required."} (400) or {"error": "Username already exists."} (400)
 
-# POST /login/
+### POST /login/
   - Description: Authenticates a user and returns access and refresh tokens.
   - Request: {"username": "user1", "password": "pass123"}
   - Response: {"access": "<token>", "refresh": "<token>"} (200)
 
-# Vehicle Management POST /vehicles/
+### Vehicle Management POST /vehicles/
   - Description: Creates a new vehicle for the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Request: {"make": "Toyota", "model": "Corolla", "year": 2020, "plate": "ABC123"}
   - Response: {"id": 1, "make": "Toyota", "model": "Corolla", "year": 2020, "plate": "ABC123", "user": "<username>"} (201)
 
-# GET /vehicles/
+### GET /vehicles/
   - Description: Retrieves a list of vehicles owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Response: [ {"id": 1, "make": "Toyota", "model": "Corolla", "year": 2020, "plate": "ABC123", "user": "<username>"}, ... ] (200)
 
-# GET /vehicles/{id}/
+### GET /vehicles/{id}/
   - Description: Retrieves details of a specific vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Response: {"id": 1, "make": "Toyota", "model": "Corolla", "year": 2020, "plate": "ABC123", "user": "<username>"} (200)
 
-# PUT /vehicles/{id}/
+### PUT /vehicles/{id}/
   - Description: Updates a specific vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Request: {"make": "Toyota", "model": "Camry", "year": 2021, "plate": "XYZ789"}
   - Response: {"id": 1, "make": "Toyota", "model": "Camry", "year": 2021, "plate": "XYZ789", "user": "<username>"} (200)
 
-# DELETE /vehicles/{id}/
+### DELETE /vehicles/{id}/
   - Description: Deletes a specific vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Response: No content (204)
 
-# Booking ManagementPOST /bookings/
+### Booking ManagementPOST /bookings/
   - Description: Creates a new booking for a vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Request: {"vehicle": 1, "start_date": "2025-07-20", "end_date": "2025-07-25"}
   - Response: {"id": 1, "vehicle": 1, "start_date": "2025-07-20", "end_date": "2025-07-25"} (201)
   - Error: {"detail": "You can only book your own vehicles."} (403)
 
-# GET /bookings/
+### GET /bookings/
   - Description: Retrieves a list of bookings for vehicles owned by the authenticated user, optionally filtered by date range.
   - Authentication: Requires JWT token in the Authorization header.
   - Query Parameters:
@@ -75,12 +75,12 @@
     - to: Filter bookings with end date less than or equal to this date (e.g., 2025-07-25).
   - Response: [ {"id": 1, "vehicle": 1, "start_date": "2025-07-20", "end_date": "2025-07-25"}, ... ] (200)
 
-# GET /bookings/{id}/
+### GET /bookings/{id}/
   - Description: Retrieves details of a specific booking for a vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Response: {"id": 1, "vehicle": 1, "start_date": "2025-07-20", "end_date": "2025-07-25"} (200)
 
-# PUT /bookings/{id}/
+### PUT /bookings/{id}/
   - Description: Updates a specific booking for a vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Request: {"vehicle": 1, "start_date": "2025-07-21", "end_date": "2025-07-26"}
@@ -88,7 +88,7 @@
     - {"id": 1, "vehicle": 1, "start_date": "2025-07-21", "end_date": "2025-07-26"} (200)
     - Error: {"detail": "You can only book your own vehicles."} (403)
 
-# DELETE /bookings/{id}/
+### DELETE /bookings/{id}/
   - Description: Deletes a specific booking for a vehicle owned by the authenticated user.
   - Authentication: Requires JWT token in the Authorization header.
   - Response: No content (204)
