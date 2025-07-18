@@ -19,6 +19,7 @@
 
 ## API Documentation
 
+# A *Postman Collection* is attached in repo for better understanding of the api endpoints.
 
 # POST /register/
  - Description: Registers a new user.
